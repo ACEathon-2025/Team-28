@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodBridge - Food Donation Made Simple</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-info {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .feature-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .step {
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Login Pages */
+        .login-container {
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .login-body {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .user-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .user-type-btn {
+            flex: 1;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-type-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .user-type-btn i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .stat-card .card-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Food Listing */
+        .food-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        
+        .food-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .food-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .food-details {
+            padding: 1.5rem;
+        }
+        
+        .food-type {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Contact and Request Styles */
+        .request-item, .contact-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .request-item.pending {
+            border-left-color: var(--warning);
+        }
+        
+        .request-item.approved {
+            border-left-color: var(--success);
+        }
+        
+        .request-item.rejected {
+            border-left-color: var(--danger);
+        }
+        
+        .contact-item.unread {
+            background: #f8f9ff;
+            border-left: 4px solid var(--info);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .toast.info {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+        
+        .toast.success .toast-icon {
+            color: var(--success);
+        }
+        
+        .toast.error .toast-icon {
+            color: var(--danger);
+        }
+        
+        .toast.warning .toast-icon {
+            color: var(--warning);
+        }
+        
+        .toast.info .toast-icon {
+            color: var(--primary);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .user-type-selector {
+                flex-direction: column;
+            }
+            
+            .dashboard {
+                padding: 1rem;
+            }
+        }
+        
+        /* Hidden sections */
+        .page-section {
+            display: none;
+        }
+        
+        .active-section {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="FoodBridgeUI.showLandingPage()">
+                <i class="fas fa-bridge"></i> FoodBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features" onclick="FoodBridgeUI.showLandingPage()">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works" onclick="FoodBridgeUI.showLandingPage()">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#impact" onclick="FoodBridgeUI.showLandingPage()">Impact</a>
+                    </li>
+                    <li class="nav-item dropdown" id="authDropdown" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <span id="userName">User</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="dashboardLink">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" id="profileLink">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutLink">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" id="loginDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="FoodBridgeUI.showLoginModal('restaurant')">Restaurant Portal</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="FoodBridgeUI.showLoginModal('ngo')">NGO Portal</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="FoodBridgeUI.showLoginModal('admin')">Admin Portal</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <section id="landingPage" class="page-section active-section">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content container">
+                <h1>Food Donation Made Simple</h1>
+                <p>Connecting restaurants with NGOs to reduce waste and fight hunger</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" onclick="FoodBridgeUI.showLoginModal('restaurant')">Restaurant Portal</a>
+                    <a href="#" class="btn btn-success" onclick="FoodBridgeUI.showLoginModal('ngo')">NGO Portal</a>
+                    <a href="#" class="btn btn-secondary" onclick="FoodBridgeUI.showLoginModal('admin')">Admin Portal</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose FoodBridge?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>AI Food Recognition</h3>
+                        <p>Simply upload a photo and our AI automatically identifies the food type, making donations quick and easy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Smart Matching</h3>
+                        <p>Our algorithm matches donations with NGOs based on location, preferences, and urgency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Real-Time Updates</h3>
+                        <p>Get instant notifications when your donation is accepted or when new donations become available.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Restaurants Report Surplus</h3>
+                    <p>Restaurants upload details about surplus food through our easy-to-use platform.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>NGOs Get Notified</h3>
+                    <p>Nearby NGOs receive instant notifications about available food donations.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Quick Pickup & Delivery</h3>
+                    <p>NGOs arrange pickup and distribute food to those in need efficiently.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Track Impact</h3>
+                    <p>Both restaurants and NGOs can track the impact of their donations in real-time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="impact" class="stats">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Our Impact</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>25,000+</h3>
+                        <p>Meals Donated</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>150+</h3>
+                        <p>Partner Restaurants</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>40+</h3>
+                        <p>NGO Partners</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>12,500+</h3>
+                        <p>Kgs Food Saved</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2023 FoodBridge. All rights reserved.</p>
+                <p>Connecting surplus food with those in need.</p>
+            </div>
+        </footer>
+    </section>
+
+    <!-- Restaurant Dashboard -->
+    <section id="restaurantDashboard" class="page-section">
+        <div class="dashboard container">
+            <div class="dashboard-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1>Restaurant Dashboard</h1>
+                        <p class="lead">Welcome, Tasty Bites Restaurant</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addWasteModal">
+                            <i class="fas fa-plus"></i> Add Food Waste
+                        </button>
+                        <button class="btn btn-primary" onclick="FoodBridgeUI.showLandingPage()">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">12</div>
+                        <div class="card-label">Total Donations</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">85</div>
+                        <div class="card-label">Kgs Saved</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">3</div>
+                        <div class="card-label">Pending Requests</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">4.8</div>
+                        <div class="card-label">Avg. Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h3>Recent Food Waste Updates</h3>
+                        <div class="food-item">
+                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                            <div class="food-details">
+                                <span class="food-type">Prepared Food</span>
+                                <h4>Vegetable Biryani</h4>
+                                <p>Freshly prepared vegetable biryani, 5 kg available. Prepared today at 2 PM.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-warning">Pending</span>
+                                        <small class="text-muted">Posted 2 hours ago</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="food-item">
+                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                            <div class="food-details">
+                                <span class="food-type">Bakery</span>
+                                <h4>Assorted Pastries</h4>
+                                <p>Fresh pastries from today's batch, 3 kg available. Best before tomorrow.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-success">Claimed</span>
+                                        <small class="text-muted">Posted 1 day ago</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h3>Available NGOs</h3>
+                        <div class="contact-item">
+                            <h5>Hope Foundation</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 2.3 km away</p>
+                            <p><i class="fas fa-utensils"></i> Accepts: Prepared Food, Bakery</p>
+                            <button class="btn btn-sm btn-primary">Contact</button>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Food for All</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 1.8 km away</p>
+                            <p><i class="fas fa-utensils"></i> Accepts: All food types</p>
+                            <button class="btn btn-sm btn-primary">Contact</button>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Community Kitchen</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 3.5 km away</p>
+                            <p><i class="fas fa-utensils"></i> Accepts: Prepared Food, Groceries</p>
+                            <button class="btn btn-sm btn-primary">Contact</button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Recent Requests</h3>
+                        <div class="request-item pending">
+                            <h5>Hope Foundation</h5>
+                            <p>Requested: Vegetable Biryani</p>
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-success">Approve</button>
+                                <button class="btn btn-sm btn-danger">Reject</button>
+                            </div>
+                        </div>
+                        
+                        <div class="request-item approved">
+                            <h5>Food for All</h5>
+                            <p>Requested: Assorted Pastries</p>
+                            <p class="text-success"><i class="fas fa-check"></i> Approved - Pickup scheduled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NGO Dashboard -->
+    <section id="ngoDashboard" class="page-section">
+        <div class="dashboard container">
+            <div class="dashboard-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1>NGO Dashboard</h1>
+                        <p class="lead">Welcome, Hope Foundation</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" onclick="FoodBridgeUI.showLandingPage()">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">47</div>
+                        <div class="card-label">Total Collections</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">320</div>
+                        <div class="card-label">Kgs Received</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">2</div>
+                        <div class="card-label">Pending Requests</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">850+</div>
+                        <div class="card-label">People Fed</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h3>Available Food Donations</h3>
+                        <div class="food-item">
+                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                            <div class="food-details">
+                                <span class="food-type">Prepared Food</span>
+                                <h4>Vegetable Biryani</h4>
+                                <p><strong>Tasty Bites Restaurant</strong> - 2.3 km away</p>
+                                <p>Freshly prepared vegetable biryani, 5 kg available. Prepared today at 2 PM.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-warning">Available</span>
+                                        <small class="text-muted">Posted 2 hours ago</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-success">Request Pickup</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="food-item">
+                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                            <div class="food-details">
+                                <span class="food-type">Prepared Food</span>
+                                <h4>Pasta & Garlic Bread</h4>
+                                <p><strong>Italian Delight</strong> - 3.1 km away</p>
+                                <p>Fresh pasta with tomato sauce and garlic bread, 8 servings available.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-warning">Available</span>
+                                        <small class="text-muted">Posted 5 hours ago</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-success">Request Pickup</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h3>Partner Restaurants</h3>
+                        <div class="contact-item">
+                            <h5>Tasty Bites Restaurant</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 2.3 km away</p>
+                            <p><i class="fas fa-star"></i> Rating: 4.8/5</p>
+                            <p>12 successful donations</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Italian Delight</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 3.1 km away</p>
+                            <p><i class="fas fa-star"></i> Rating: 4.5/5</p>
+                            <p>8 successful donations</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Green Leaf Cafe</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 4.2 km away</p>
+                            <p><i class="fas fa-star"></i> Rating: 4.7/5</p>
+                            <p>15 successful donations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Your Recent Requests</h3>
+                        <div class="request-item pending">
+                            <h5>Tasty Bites Restaurant</h5>
+                            <p>Requested: Vegetable Biryani</p>
+                            <p class="text-warning"><i class="fas fa-clock"></i> Waiting for approval</p>
+                        </div>
+                        
+                        <div class="request-item approved">
+                            <h5>Italian Delight</h5>
+                            <p>Requested: Pasta & Garlic Bread</p>
+                            <p class="text-success"><i class="fas fa-check"></i> Approved - Pickup scheduled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="adminDashboard" class="page-section">
+        <div class="dashboard container">
+            <div class="dashboard-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1>Admin Dashboard</h1>
+                        <p class="lead">System Overview & Management</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" onclick="FoodBridgeUI.showLandingPage()">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">150</div>
+                        <div class="card-label">Restaurants</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">40</div>
+                        <div class="card-label">NGOs</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">25,000</div>
+                        <div class="card-label">Meals Donated</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="card-value">12.5T</div>
+                        <div class="card-label">Food Saved</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h3>Recent Activities</h3>
+                        <div class="request-item">
+                            <h5>New Restaurant Registration</h5>
+                            <p><strong>Spice Garden</strong> registered and awaiting approval.</p>
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-success">Approve</button>
+                                <button class="btn btn-sm btn-danger">Reject</button>
+                            </div>
+                        </div>
+                        
+                        <div class="request-item">
+                            <h5>Food Donation Completed</h5>
+                            <p><strong>Tasty Bites Restaurant</strong> donated 5kg food to <strong>Hope Foundation</strong>.</p>
+                            <p class="text-muted">Completed 2 hours ago</p>
+                        </div>
+                        
+                        <div class="request-item">
+                            <h5>New NGO Registration</h5>
+                            <p><strong>Community Meals</strong> registered and awaiting verification.</p>
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-success">Verify</button>
+                                <button class="btn btn-sm btn-danger">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card mt-4">
+                        <h3>System Analytics</h3>
+                        <div class="p-4 text-center">
+                            <p class="text-muted">Analytics charts would be displayed here in a real application</p>
+                            <div class="bg-light rounded p-5">
+                                <i class="fas fa-chart-bar fa-3x text-primary"></i>
+                                <p class="mt-3">Donation Trends & Impact Metrics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h3>Quick Actions</h3>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info">Manage Restaurants</button>
+                            <button class="btn btn-info">Manage NGOs</button>
+                            <button class="btn btn-info">View Reports</button>
+                            <button class="btn btn-info">System Settings</button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card mt-4">
+                        <h3>Pending Approvals</h3>
+                        <div class="contact-item unread">
+                            <h5>Spice Garden</h5>
+                            <p>New restaurant registration</p>
+                            <small class="text-muted">Waiting for 2 days</small>
+                        </div>
+                        
+                        <div class="contact-item unread">
+                            <h5>Community Meals</h5>
+                            <p>New NGO registration</p>
+                            <small class="text-muted">Waiting for 1 day</small>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Food for All</h5>
+                            <p>Document update request</p>
+                            <small class="text-muted">Waiting for 3 days</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-card">
+                <div class="login-header">
+                    <h2 id="loginModalLabel">Login to FoodBridge</h2>
+                    <p id="loginSubtitle">Access your portal</p>
+                </div>
+                <div class="login-body">
+                    <div class="user-type-selector">
+                        <div class="user-type-btn active" id="restaurantLoginBtn" onclick="FoodBridgeUI.selectUserType('restaurant')">
+                            <i class="fas fa-utensils"></i>
+                            <div>Restaurant</div>
+                        </div>
+                        <div class="user-type-btn" id="ngoLoginBtn" onclick="FoodBridgeUI.selectUserType('ngo')">
+                            <i class="fas fa-hands-helping"></i>
+                            <div>NGO</div>
+                        </div>
+                        <div class="user-type-btn" id="adminLoginBtn" onclick="FoodBridgeUI.selectUserType('admin')">
+                            <i class="fas fa-user-shield"></i>
+                            <div>Admin</div>
+                        </div>
+                    </div>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" style="padding: 0.75rem;">Login</button>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-muted">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Waste Modal -->
+    <div class="modal fade" id="addWasteModal" tabindex="-1" aria-labelledby="addWasteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addWasteModalLabel">Add Food Waste</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="foodType" class="form-label">Food Type</label>
+                            <select class="form-select" id="foodType">
+                                <option selected>Select food type</option>
+                                <option value="prepared">Prepared Food</option>
+                                <option value="bakery">Bakery</option>
+                                <option value="produce">Fresh Produce</option>
+                                <option value="dairy">Dairy</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="foodDescription" class="form-label">Food Description</label>
+                            <input type="text" class="form-control" id="foodDescription" placeholder="e.g., Vegetable Biryani">
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity (kg)</label>
+                            <input type="number" class="form-control" id="quantity" placeholder="e.g., 5">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bestBefore" class="form-label">Best Before</label>
+                            <input type="datetime-local" class="form-control" id="bestBefore">
+                        </div>
+                        <div class="mb-3">
+                            <label for="foodImage" class="form-label">Food Image (Optional)</label>
+                            <input class="form-control" type="file" id="foodImage">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Food Waste</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // FoodBridge UI Controller
+        const FoodBridgeUI = {
+            currentUser: null,
+            userType: null,
+            
+            init: function() {
+                // Set up event listeners
+                document.getElementById('loginForm').addEventListener('submit', this.handleLogin.bind(this));
+                document.getElementById('logoutLink').addEventListener('click', this.handleLogout.bind(this));
+                document.getElementById('dashboardLink').addEventListener('click', this.showDashboard.bind(this));
+                
+                // Check if user is already logged in (from sessionStorage)
+                this.checkLoginStatus();
+            },
+            
+            checkLoginStatus: function() {
+                const user = sessionStorage.getItem('foodBridgeUser');
+                const userType = sessionStorage.getItem('foodBridgeUserType');
+                
+                if (user && userType) {
+                    this.currentUser = user;
+                    this.userType = userType;
+                    this.showDashboard();
+                }
+            },
+            
+            showLandingPage: function() {
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active-section');
+                });
+                
+                // Show landing page
+                document.getElementById('landingPage').classList.add('active-section');
+                
+                // Update navigation
+                document.getElementById('authDropdown').style.display = 'none';
+                document.getElementById('loginDropdown').style.display = 'block';
+            },
+            
+            showLoginModal: function(userType) {
+                this.selectUserType(userType);
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            },
+            
+            selectUserType: function(userType) {
+                // Update active button
+                document.querySelectorAll('.user-type-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                if (userType === 'restaurant') {
+                    document.getElementById('restaurantLoginBtn').classList.add('active');
+                    document.getElementById('loginModalLabel').textContent = 'Restaurant Login';
+                    document.getElementById('loginSubtitle').textContent = 'Access your restaurant portal';
+                } else if (userType === 'ngo') {
+                    document.getElementById('ngoLoginBtn').classList.add('active');
+                    document.getElementById('loginModalLabel').textContent = 'NGO Login';
+                    document.getElementById('loginSubtitle').textContent = 'Access your NGO portal';
+                } else if (userType === 'admin') {
+                    document.getElementById('adminLoginBtn').classList.add('active');
+                    document.getElementById('loginModalLabel').textContent = 'Admin Login';
+                    document.getElementById('loginSubtitle').textContent = 'Access admin dashboard';
+                }
+                
+                this.userType = userType;
+            },
+            
+            handleLogin: function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Simple validation
+                if (!email || !password) {
+                    this.showToast('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                // In a real app, this would be an API call to authenticate
+                // For demo purposes, we'll simulate a successful login
+                this.currentUser = email;
+                
+                // Store login state
+                sessionStorage.setItem('foodBridgeUser', this.currentUser);
+                sessionStorage.setItem('foodBridgeUserType', this.userType);
+                
+                // Close modal
+                const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                loginModal.hide();
+                
+                // Show dashboard
+                this.showDashboard();
+                
+                this.showToast('Login successful!', 'success');
+            },
+            
+            handleLogout: function() {
+                this.currentUser = null;
+                this.userType = null;
+                
+                // Clear session storage
+                sessionStorage.removeItem('foodBridgeUser');
+                sessionStorage.removeItem('foodBridgeUserType');
+                
+                // Show landing page
+                this.showLandingPage();
+                
+                this.showToast('You have been logged out', 'info');
+            },
+            
+            showDashboard: function() {
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active-section');
+                });
+                
+                // Show appropriate dashboard based on user type
+                if (this.userType === 'restaurant') {
+                    document.getElementById('restaurantDashboard').classList.add('active-section');
+                    document.getElementById('userName').textContent = 'Tasty Bites Restaurant';
+                } else if (this.userType === 'ngo') {
+                    document.getElementById('ngoDashboard').classList.add('active-section');
+                    document.getElementById('userName').textContent = 'Hope Foundation';
+                } else if (this.userType === 'admin') {
+                    document.getElementById('adminDashboard').classList.add('active-section');
+                    document.getElementById('userName').textContent = 'Admin';
+                }
+                
+                // Update navigation
+                document.getElementById('authDropdown').style.display = 'block';
+                document.getElementById('loginDropdown').style.display = 'none';
+            },
+            
+            showToast: function(message, type = 'info') {
+                const toastContainer = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                
+                let icon = 'info-circle';
+                if (type === 'success') icon = 'check-circle';
+                if (type === 'error') icon = 'exclamation-circle';
+                if (type === 'warning') icon = 'exclamation-triangle';
+                
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="toast-message">${message}</div>
+                `;
+                
+                toastContainer.appendChild(toast);
+                
+                // Remove toast after 5 seconds
+                setTimeout(() => {
+                    toast.remove();
+                }, 5000);
+            }
+        };
+        
+        // Initialize the application when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            FoodBridgeUI.init();
+        });
+    </script>
+</body>
+</html>
