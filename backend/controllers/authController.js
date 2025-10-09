@@ -80,6 +80,8 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
+    console.log('🔐 Login attempt:', email); // Add this line
 
     // Find user by email
     const result = await query(
@@ -87,20 +89,28 @@ exports.login = async (req, res) => {
       [email]
     );
 
+    console.log('👤 User found:', result.rows.length > 0 ? result.rows[0].email : 'NOT FOUND'); // Add this
+
     if (result.rows.length === 0) {
+      console.log('❌ User not found:', email); // Add this
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
     const user = result.rows[0];
 
-    // Check if account is active
+    console.log('📋 User type:', user.user_type, 'Verified:', user.is_verified, 'Active:', user.is_active); // Add this
+
     if (!user.is_active) {
+      console.log('❌ Account inactive'); // Add this
       return res.status(403).json({ error: 'Account has been deactivated' });
     }
 
     // Verify password
     const validPassword = await bcrypt.compare(password, user.password_hash);
+    console.log('🔑 Password valid:', validPassword); // Add this
+
     if (!validPassword) {
+      console.log('❌ Invalid password'); // Add this
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
@@ -124,7 +134,7 @@ exports.login = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('❌ Login error:', error); // Add this
     res.status(500).json({ error: 'Login failed. Please try again.' });
   }
 };
