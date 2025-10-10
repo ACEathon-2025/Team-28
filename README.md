@@ -1,4 +1,5 @@
-🌉 FoodBridge - Food Donation Made Simple
+🌉 FoodBridge 
+- Food Donation Made Simple
 "Connecting restaurants with NGOs to reduce food waste and fight hunger through AI-powered smart matching"
 
 
