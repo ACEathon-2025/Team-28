@@ -15,6 +15,7 @@
 **FoodBridge** solves this by creating a **seamless digital bridge** between **restaurants** with surplus food and **NGOs** serving communities in need.
 
 ---
+<img width="1920" height="869" alt="Image" src="https://github.com/user-attachments/assets/98ecb711-02c9-48e7-b318-e791ca7de690" />
 
 ## ✨ **Key Features**
 
