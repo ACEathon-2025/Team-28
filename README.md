@@ -169,9 +169,3 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 
-```
-
----
-
-Would you like me to make it **GitHub-dark-theme optimized** (with banner, badges, and color highlights like shields.io for Node, React, PostgreSQL, etc.)? That’ll make it look **professional like open-source startup projects.**
-```
