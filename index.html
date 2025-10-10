@@ -725,7 +725,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h1>Restaurant Dashboard</h1>
-                        <p class="lead">Welcome, Tasty Bites Restaurant</p>
+                        <p class="lead">Welcome, <span id="restaurantName">Restaurant</span></p>
                     </div>
                     <div class="d-flex gap-2">
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addWasteModal">
@@ -741,25 +741,25 @@
             <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">12</div>
+                        <div class="card-value" id="totalDonations">0</div>
                         <div class="card-label">Total Donations</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">85</div>
+                        <div class="card-value" id="kgsSaved">0</div>
                         <div class="card-label">Kgs Saved</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">3</div>
+                        <div class="card-value" id="pendingRequests">0</div>
                         <div class="card-label">Pending Requests</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">4.8</div>
+                        <div class="card-value" id="avgRating">0</div>
                         <div class="card-label">Avg. Rating</div>
                     </div>
                 </div>
@@ -769,41 +769,8 @@
                 <div class="col-md-8">
                     <div class="dashboard-card">
                         <h3>Recent Food Waste Updates</h3>
-                        <div class="food-item">
-                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="food-details">
-                                <span class="food-type">Prepared Food</span>
-                                <h4>Vegetable Biryani</h4>
-                                <p>Freshly prepared vegetable biryani, 5 kg available. Prepared today at 2 PM.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-warning">Pending</span>
-                                        <small class="text-muted">Posted 2 hours ago</small>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="food-item">
-                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="food-details">
-                                <span class="food-type">Bakery</span>
-                                <h4>Assorted Pastries</h4>
-                                <p>Fresh pastries from today's batch, 3 kg available. Best before tomorrow.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-success">Claimed</span>
-                                        <small class="text-muted">Posted 1 day ago</small>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-outline-primary">View Details</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="restaurantFoodListings">
+                            <!-- Food listings will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -811,43 +778,15 @@
                 <div class="col-md-4">
                     <div class="dashboard-card">
                         <h3>Available NGOs</h3>
-                        <div class="contact-item">
-                            <h5>Hope Foundation</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 2.3 km away</p>
-                            <p><i class="fas fa-utensils"></i> Accepts: Prepared Food, Bakery</p>
-                            <button class="btn btn-sm btn-primary">Contact</button>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <h5>Food for All</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 1.8 km away</p>
-                            <p><i class="fas fa-utensils"></i> Accepts: All food types</p>
-                            <button class="btn btn-sm btn-primary">Contact</button>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <h5>Community Kitchen</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 3.5 km away</p>
-                            <p><i class="fas fa-utensils"></i> Accepts: Prepared Food, Groceries</p>
-                            <button class="btn btn-sm btn-primary">Contact</button>
+                        <div id="availableNGOs">
+                            <!-- NGOs will be dynamically added here -->
                         </div>
                     </div>
                     
                     <div class="dashboard-card">
                         <h3>Recent Requests</h3>
-                        <div class="request-item pending">
-                            <h5>Hope Foundation</h5>
-                            <p>Requested: Vegetable Biryani</p>
-                            <div class="d-flex gap-2 mt-2">
-                                <button class="btn btn-sm btn-success">Approve</button>
-                                <button class="btn btn-sm btn-danger">Reject</button>
-                            </div>
-                        </div>
-                        
-                        <div class="request-item approved">
-                            <h5>Food for All</h5>
-                            <p>Requested: Assorted Pastries</p>
-                            <p class="text-success"><i class="fas fa-check"></i> Approved - Pickup scheduled</p>
+                        <div id="restaurantRequests">
+                            <!-- Requests will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -862,7 +801,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h1>NGO Dashboard</h1>
-                        <p class="lead">Welcome, Hope Foundation</p>
+                        <p class="lead">Welcome, <span id="ngoName">NGO</span></p>
                     </div>
                     <div>
                         <button class="btn btn-primary" onclick="FoodBridgeUI.showLandingPage()">
@@ -875,25 +814,25 @@
             <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">47</div>
+                        <div class="card-value" id="totalCollections">0</div>
                         <div class="card-label">Total Collections</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">320</div>
+                        <div class="card-value" id="kgsReceived">0</div>
                         <div class="card-label">Kgs Received</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">2</div>
+                        <div class="card-value" id="pendingNGORequests">0</div>
                         <div class="card-label">Pending Requests</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">850+</div>
+                        <div class="card-value" id="peopleFed">0</div>
                         <div class="card-label">People Fed</div>
                     </div>
                 </div>
@@ -903,42 +842,8 @@
                 <div class="col-md-8">
                     <div class="dashboard-card">
                         <h3>Available Food Donations</h3>
-                        <div class="food-item">
-                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="food-details">
-                                <span class="food-type">Prepared Food</span>
-                                <h4>Vegetable Biryani</h4>
-                                <p><strong>Tasty Bites Restaurant</strong> - 2.3 km away</p>
-                                <p>Freshly prepared vegetable biryani, 5 kg available. Prepared today at 2 PM.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-warning">Available</span>
-                                        <small class="text-muted">Posted 2 hours ago</small>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-success">Request Pickup</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="food-item">
-                            <div class="food-image" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="food-details">
-                                <span class="food-type">Prepared Food</span>
-                                <h4>Pasta & Garlic Bread</h4>
-                                <p><strong>Italian Delight</strong> - 3.1 km away</p>
-                                <p>Fresh pasta with tomato sauce and garlic bread, 8 servings available.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-warning">Available</span>
-                                        <small class="text-muted">Posted 5 hours ago</small>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-sm btn-success">Request Pickup</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="availableFoodListings">
+                            <!-- Food listings will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -946,40 +851,15 @@
                 <div class="col-md-4">
                     <div class="dashboard-card">
                         <h3>Partner Restaurants</h3>
-                        <div class="contact-item">
-                            <h5>Tasty Bites Restaurant</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 2.3 km away</p>
-                            <p><i class="fas fa-star"></i> Rating: 4.8/5</p>
-                            <p>12 successful donations</p>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <h5>Italian Delight</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 3.1 km away</p>
-                            <p><i class="fas fa-star"></i> Rating: 4.5/5</p>
-                            <p>8 successful donations</p>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <h5>Green Leaf Cafe</h5>
-                            <p><i class="fas fa-map-marker-alt"></i> 4.2 km away</p>
-                            <p><i class="fas fa-star"></i> Rating: 4.7/5</p>
-                            <p>15 successful donations</p>
+                        <div id="partnerRestaurants">
+                            <!-- Restaurants will be dynamically added here -->
                         </div>
                     </div>
                     
                     <div class="dashboard-card">
                         <h3>Your Recent Requests</h3>
-                        <div class="request-item pending">
-                            <h5>Tasty Bites Restaurant</h5>
-                            <p>Requested: Vegetable Biryani</p>
-                            <p class="text-warning"><i class="fas fa-clock"></i> Waiting for approval</p>
-                        </div>
-                        
-                        <div class="request-item approved">
-                            <h5>Italian Delight</h5>
-                            <p>Requested: Pasta & Garlic Bread</p>
-                            <p class="text-success"><i class="fas fa-check"></i> Approved - Pickup scheduled</p>
+                        <div id="ngoRequests">
+                            <!-- Requests will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -1007,25 +887,25 @@
             <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">150</div>
+                        <div class="card-value" id="totalRestaurants">0</div>
                         <div class="card-label">Restaurants</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">40</div>
+                        <div class="card-value" id="totalNGOs">0</div>
                         <div class="card-label">NGOs</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">25,000</div>
+                        <div class="card-value" id="totalMeals">0</div>
                         <div class="card-label">Meals Donated</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="dashboard-card stat-card">
-                        <div class="card-value">12.5T</div>
+                        <div class="card-value" id="totalFoodSaved">0</div>
                         <div class="card-label">Food Saved</div>
                     </div>
                 </div>
@@ -1035,28 +915,8 @@
                 <div class="col-md-8">
                     <div class="dashboard-card">
                         <h3>Recent Activities</h3>
-                        <div class="request-item">
-                            <h5>New Restaurant Registration</h5>
-                            <p><strong>Spice Garden</strong> registered and awaiting approval.</p>
-                            <div class="d-flex gap-2 mt-2">
-                                <button class="btn btn-sm btn-success">Approve</button>
-                                <button class="btn btn-sm btn-danger">Reject</button>
-                            </div>
-                        </div>
-                        
-                        <div class="request-item">
-                            <h5>Food Donation Completed</h5>
-                            <p><strong>Tasty Bites Restaurant</strong> donated 5kg food to <strong>Hope Foundation</strong>.</p>
-                            <p class="text-muted">Completed 2 hours ago</p>
-                        </div>
-                        
-                        <div class="request-item">
-                            <h5>New NGO Registration</h5>
-                            <p><strong>Community Meals</strong> registered and awaiting verification.</p>
-                            <div class="d-flex gap-2 mt-2">
-                                <button class="btn btn-sm btn-success">Verify</button>
-                                <button class="btn btn-sm btn-danger">Reject</button>
-                            </div>
+                        <div id="recentActivities">
+                            <!-- Activities will be dynamically added here -->
                         </div>
                     </div>
                     
@@ -1076,8 +936,8 @@
                     <div class="dashboard-card">
                         <h3>Quick Actions</h3>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-info">Manage Restaurants</button>
-                            <button class="btn btn-info">Manage NGOs</button>
+                            <button class="btn btn-info" onclick="FoodBridgeBackend.setupDemoData()">Setup Demo Data</button>
+                            <button class="btn btn-info" onclick="FoodBridgeBackend.clearAllData()">Clear All Data</button>
                             <button class="btn btn-info">View Reports</button>
                             <button class="btn btn-info">System Settings</button>
                         </div>
@@ -1085,22 +945,8 @@
                     
                     <div class="dashboard-card mt-4">
                         <h3>Pending Approvals</h3>
-                        <div class="contact-item unread">
-                            <h5>Spice Garden</h5>
-                            <p>New restaurant registration</p>
-                            <small class="text-muted">Waiting for 2 days</small>
-                        </div>
-                        
-                        <div class="contact-item unread">
-                            <h5>Community Meals</h5>
-                            <p>New NGO registration</p>
-                            <small class="text-muted">Waiting for 1 day</small>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <h5>Food for All</h5>
-                            <p>Document update request</p>
-                            <small class="text-muted">Waiting for 3 days</small>
+                        <div id="pendingApprovals">
+                            <!-- Approvals will be dynamically added here -->
                         </div>
                     </div>
                 </div>
@@ -1165,39 +1011,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="addWasteForm">
                         <div class="mb-3">
                             <label for="foodType" class="form-label">Food Type</label>
-                            <select class="form-select" id="foodType">
-                                <option selected>Select food type</option>
-                                <option value="prepared">Prepared Food</option>
-                                <option value="bakery">Bakery</option>
-                                <option value="produce">Fresh Produce</option>
-                                <option value="dairy">Dairy</option>
-                                <option value="other">Other</option>
+                            <select class="form-select" id="foodType" required>
+                                <option value="" selected disabled>Select food type</option>
+                                <option value="Prepared Food">Prepared Food</option>
+                                <option value="Bakery">Bakery</option>
+                                <option value="Fresh Produce">Fresh Produce</option>
+                                <option value="Dairy">Dairy</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="foodDescription" class="form-label">Food Description</label>
-                            <input type="text" class="form-control" id="foodDescription" placeholder="e.g., Vegetable Biryani">
+                            <input type="text" class="form-control" id="foodDescription" placeholder="e.g., Vegetable Biryani" required>
                         </div>
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity (kg)</label>
-                            <input type="number" class="form-control" id="quantity" placeholder="e.g., 5">
+                            <input type="number" class="form-control" id="quantity" placeholder="e.g., 5" required min="1">
                         </div>
                         <div class="mb-3">
                             <label for="bestBefore" class="form-label">Best Before</label>
-                            <input type="datetime-local" class="form-control" id="bestBefore">
+                            <input type="datetime-local" class="form-control" id="bestBefore" required>
                         </div>
                         <div class="mb-3">
-                            <label for="foodImage" class="form-label">Food Image (Optional)</label>
-                            <input class="form-control" type="file" id="foodImage">
+                            <label for="foodImage" class="form-label">Food Image URL (Optional)</label>
+                            <input type="url" class="form-control" id="foodImage" placeholder="https://example.com/image.jpg">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Add Food Waste</button>
+                    <button type="button" class="btn btn-primary" onclick="FoodBridgeBackend.addFoodWaste()">Add Food Waste</button>
                 </div>
             </div>
         </div>
@@ -1205,27 +1051,304 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // FoodBridge Backend with localStorage
+        const FoodBridgeBackend = {
+            // Initialize data structure
+            init: function() {
+                if (!localStorage.getItem('foodBridgeData')) {
+                    this.setupDemoData();
+                }
+            },
+
+            // Get all data
+            getData: function() {
+                return JSON.parse(localStorage.getItem('foodBridgeData') || '{}');
+            },
+
+            // Save data
+            saveData: function(data) {
+                localStorage.setItem('foodBridgeData', JSON.stringify(data));
+            },
+
+            // Setup demo data
+            setupDemoData: function() {
+                const demoData = {
+                    users: [
+                        { id: 1, email: 'restaurant@demo.com', password: 'demo123', name: 'Tasty Bites Restaurant', type: 'restaurant', address: '123 Main St, City', phone: '555-0101' },
+                        { id: 2, email: 'ngo@demo.com', password: 'demo123', name: 'Hope Foundation', type: 'ngo', address: '456 Oak Ave, City', phone: '555-0102' },
+                        { id: 3, email: 'admin@demo.com', password: 'demo123', name: 'System Admin', type: 'admin', address: '789 Admin Blvd, City', phone: '555-0103' }
+                    ],
+                    foodListings: [
+                        { id: 1, restaurantId: 1, foodType: 'Prepared Food', description: 'Vegetable Biryani', quantity: 5, bestBefore: '2023-12-31T18:00', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', status: 'available', createdAt: new Date().toISOString() },
+                        { id: 2, restaurantId: 1, foodType: 'Bakery', description: 'Assorted Pastries', quantity: 3, bestBefore: '2023-12-25T12:00', image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', status: 'claimed', createdAt: new Date(Date.now() - 86400000).toISOString() }
+                    ],
+                    donationRequests: [
+                        { id: 1, ngoId: 2, foodListingId: 1, status: 'pending', requestedAt: new Date().toISOString() },
+                        { id: 2, ngoId: 2, foodListingId: 2, status: 'approved', requestedAt: new Date(Date.now() - 43200000).toISOString() }
+                    ],
+                    restaurants: [
+                        { id: 1, userId: 1, cuisineType: 'Indian', operatingHours: '10AM-10PM', rating: 4.8 }
+                    ],
+                    ngos: [
+                        { id: 1, userId: 2, mission: 'Fighting hunger in our community', services: 'Food distribution, Community kitchen', operatingHours: '9AM-6PM' }
+                    ]
+                };
+                
+                this.saveData(demoData);
+                FoodBridgeUI.showToast('Demo data setup complete!', 'success');
+                if (FoodBridgeUI.userType === 'admin') {
+                    FoodBridgeUI.loadAdminDashboard();
+                }
+            },
+
+            // Clear all data
+            clearAllData: function() {
+                localStorage.removeItem('foodBridgeData');
+                localStorage.removeItem('foodBridgeUser');
+                localStorage.removeItem('foodBridgeUserType');
+                FoodBridgeUI.showToast('All data cleared!', 'info');
+                FoodBridgeUI.showLandingPage();
+            },
+
+            // User authentication
+            authenticate: function(email, password) {
+                const data = this.getData();
+                const user = data.users.find(u => u.email === email && u.password === password);
+                return user || null;
+            },
+
+            // Add food waste
+            addFoodWaste: function() {
+                const foodType = document.getElementById('foodType').value;
+                const description = document.getElementById('foodDescription').value;
+                const quantity = document.getElementById('quantity').value;
+                const bestBefore = document.getElementById('bestBefore').value;
+                const image = document.getElementById('foodImage').value || 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
+
+                if (!foodType || !description || !quantity || !bestBefore) {
+                    FoodBridgeUI.showToast('Please fill in all required fields', 'error');
+                    return;
+                }
+
+                const data = this.getData();
+                const newId = data.foodListings.length > 0 ? Math.max(...data.foodListings.map(f => f.id)) + 1 : 1;
+                
+                data.foodListings.push({
+                    id: newId,
+                    restaurantId: FoodBridgeUI.currentUser.id,
+                    foodType,
+                    description,
+                    quantity: parseFloat(quantity),
+                    bestBefore,
+                    image,
+                    status: 'available',
+                    createdAt: new Date().toISOString()
+                });
+
+                this.saveData(data);
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addWasteModal'));
+                modal.hide();
+                
+                // Reset form
+                document.getElementById('addWasteForm').reset();
+                
+                FoodBridgeUI.showToast('Food waste added successfully!', 'success');
+                FoodBridgeUI.loadRestaurantDashboard();
+            },
+
+            // Request food donation
+            requestDonation: function(foodListingId) {
+                const data = this.getData();
+                const newId = data.donationRequests.length > 0 ? Math.max(...data.donationRequests.map(r => r.id)) + 1 : 1;
+                
+                data.donationRequests.push({
+                    id: newId,
+                    ngoId: FoodBridgeUI.currentUser.id,
+                    foodListingId,
+                    status: 'pending',
+                    requestedAt: new Date().toISOString()
+                });
+
+                // Update food listing status
+                const foodListing = data.foodListings.find(f => f.id === foodListingId);
+                if (foodListing) {
+                    foodListing.status = 'pending';
+                }
+
+                this.saveData(data);
+                FoodBridgeUI.showToast('Donation request submitted!', 'success');
+                FoodBridgeUI.loadNGODashboard();
+            },
+
+            // Update donation request status
+            updateRequestStatus: function(requestId, status) {
+                const data = this.getData();
+                const request = data.donationRequests.find(r => r.id === requestId);
+                
+                if (request) {
+                    request.status = status;
+                    
+                    // Update food listing status
+                    const foodListing = data.foodListings.find(f => f.id === request.foodListingId);
+                    if (foodListing) {
+                        foodListing.status = status === 'approved' ? 'claimed' : 'available';
+                    }
+                    
+                    this.saveData(data);
+                    FoodBridgeUI.showToast(`Request ${status} successfully!`, 'success');
+                    FoodBridgeUI.loadRestaurantDashboard();
+                }
+            },
+
+            // Get restaurant dashboard data
+            getRestaurantDashboard: function(restaurantId) {
+                const data = this.getData();
+                const foodListings = data.foodListings.filter(f => f.restaurantId === restaurantId);
+                const donationRequests = data.donationRequests.filter(r => 
+                    foodListings.some(f => f.id === r.foodListingId)
+                );
+                const ngos = data.ngos.map(ngo => {
+                    const user = data.users.find(u => u.id === ngo.userId);
+                    return { ...ngo, ...user };
+                });
+
+                // Calculate stats
+                const totalDonations = foodListings.filter(f => f.status === 'claimed').length;
+                const kgsSaved = foodListings
+                    .filter(f => f.status === 'claimed')
+                    .reduce((sum, f) => sum + f.quantity, 0);
+                const pendingRequests = donationRequests.filter(r => r.status === 'pending').length;
+
+                return {
+                    foodListings,
+                    donationRequests: donationRequests.map(req => {
+                        const ngo = ngos.find(n => n.id === req.ngoId);
+                        const foodListing = foodListings.find(f => f.id === req.foodListingId);
+                        return { ...req, ngo, foodListing };
+                    }),
+                    ngos,
+                    stats: {
+                        totalDonations,
+                        kgsSaved,
+                        pendingRequests,
+                        avgRating: 4.8
+                    }
+                };
+            },
+
+            // Get NGO dashboard data
+            getNGODashboard: function(ngoId) {
+                const data = this.getData();
+                const foodListings = data.foodListings.filter(f => f.status === 'available');
+                const donationRequests = data.donationRequests.filter(r => r.ngoId === ngoId);
+                const restaurants = data.restaurants.map(rest => {
+                    const user = data.users.find(u => u.id === rest.userId);
+                    return { ...rest, ...user };
+                });
+
+                // Calculate stats
+                const totalCollections = donationRequests.filter(r => r.status === 'approved').length;
+                const kgsReceived = donationRequests
+                    .filter(r => r.status === 'approved')
+                    .reduce((sum, r) => {
+                        const foodListing = data.foodListings.find(f => f.id === r.foodListingId);
+                        return sum + (foodListing ? foodListing.quantity : 0);
+                    }, 0);
+                const pendingRequests = donationRequests.filter(r => r.status === 'pending').length;
+
+                return {
+                    foodListings: foodListings.map(listing => {
+                        const restaurant = restaurants.find(r => r.id === listing.restaurantId);
+                        return { ...listing, restaurant };
+                    }),
+                    donationRequests: donationRequests.map(req => {
+                        const foodListing = data.foodListings.find(f => f.id === req.foodListingId);
+                        const restaurant = restaurants.find(r => r.id === foodListing.restaurantId);
+                        return { ...req, foodListing: { ...foodListing, restaurant } };
+                    }),
+                    restaurants,
+                    stats: {
+                        totalCollections,
+                        kgsReceived,
+                        pendingRequests,
+                        peopleFed: Math.round(kgsReceived * 5) // Estimate 5 meals per kg
+                    }
+                };
+            },
+
+            // Get admin dashboard data
+            getAdminDashboard: function() {
+                const data = this.getData();
+                const restaurants = data.users.filter(u => u.type === 'restaurant');
+                const ngos = data.users.filter(u => u.type === 'ngo');
+                const foodListings = data.foodListings;
+                const donationRequests = data.donationRequests;
+
+                // Calculate stats
+                const totalRestaurants = restaurants.length;
+                const totalNGOs = ngos.length;
+                const totalMeals = donationRequests.filter(r => r.status === 'approved').length;
+                const totalFoodSaved = foodListings
+                    .filter(f => f.status === 'claimed')
+                    .reduce((sum, f) => sum + f.quantity, 0);
+
+                // Recent activities
+                const recentActivities = [
+                    ...foodListings.slice(-3).map(f => ({
+                        type: 'foodListing',
+                        message: `New food listing: ${f.description}`,
+                        timestamp: f.createdAt
+                    })),
+                    ...donationRequests.slice(-3).map(r => ({
+                        type: 'donation',
+                        message: `Donation request ${r.status}`,
+                        timestamp: r.requestedAt
+                    }))
+                ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                return {
+                    stats: {
+                        totalRestaurants,
+                        totalNGOs,
+                        totalMeals,
+                        totalFoodSaved
+                    },
+                    recentActivities,
+                    pendingApprovals: restaurants.slice(0, 3).map(r => ({
+                        name: r.name,
+                        type: 'Restaurant Registration',
+                        waiting: '2 days'
+                    }))
+                };
+            }
+        };
+
         // FoodBridge UI Controller
         const FoodBridgeUI = {
             currentUser: null,
             userType: null,
             
             init: function() {
+                // Initialize backend
+                FoodBridgeBackend.init();
+                
                 // Set up event listeners
                 document.getElementById('loginForm').addEventListener('submit', this.handleLogin.bind(this));
                 document.getElementById('logoutLink').addEventListener('click', this.handleLogout.bind(this));
                 document.getElementById('dashboardLink').addEventListener('click', this.showDashboard.bind(this));
                 
-                // Check if user is already logged in (from sessionStorage)
+                // Check if user is already logged in
                 this.checkLoginStatus();
             },
             
             checkLoginStatus: function() {
-                const user = sessionStorage.getItem('foodBridgeUser');
-                const userType = sessionStorage.getItem('foodBridgeUserType');
+                const user = localStorage.getItem('foodBridgeUser');
+                const userType = localStorage.getItem('foodBridgeUserType');
                 
                 if (user && userType) {
-                    this.currentUser = user;
+                    this.currentUser = JSON.parse(user);
                     this.userType = userType;
                     this.showDashboard();
                 }
@@ -1286,13 +1409,19 @@
                     return;
                 }
                 
-                // In a real app, this would be an API call to authenticate
-                // For demo purposes, we'll simulate a successful login
-                this.currentUser = email;
+                // Authenticate user
+                const user = FoodBridgeBackend.authenticate(email, password);
+                if (!user) {
+                    this.showToast('Invalid email or password', 'error');
+                    return;
+                }
+                
+                this.currentUser = user;
+                this.userType = user.type;
                 
                 // Store login state
-                sessionStorage.setItem('foodBridgeUser', this.currentUser);
-                sessionStorage.setItem('foodBridgeUserType', this.userType);
+                localStorage.setItem('foodBridgeUser', JSON.stringify(this.currentUser));
+                localStorage.setItem('foodBridgeUserType', this.userType);
                 
                 // Close modal
                 const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
@@ -1309,8 +1438,8 @@
                 this.userType = null;
                 
                 // Clear session storage
-                sessionStorage.removeItem('foodBridgeUser');
-                sessionStorage.removeItem('foodBridgeUserType');
+                localStorage.removeItem('foodBridgeUser');
+                localStorage.removeItem('foodBridgeUserType');
                 
                 // Show landing page
                 this.showLandingPage();
@@ -1324,21 +1453,192 @@
                     section.classList.remove('active-section');
                 });
                 
-                // Show appropriate dashboard based on user type
-                if (this.userType === 'restaurant') {
-                    document.getElementById('restaurantDashboard').classList.add('active-section');
-                    document.getElementById('userName').textContent = 'Tasty Bites Restaurant';
-                } else if (this.userType === 'ngo') {
-                    document.getElementById('ngoDashboard').classList.add('active-section');
-                    document.getElementById('userName').textContent = 'Hope Foundation';
-                } else if (this.userType === 'admin') {
-                    document.getElementById('adminDashboard').classList.add('active-section');
-                    document.getElementById('userName').textContent = 'Admin';
+                try {
+                    if (this.userType === 'restaurant') {
+                        document.getElementById('restaurantDashboard').classList.add('active-section');
+                        document.getElementById('userName').textContent = this.currentUser.name;
+                        document.getElementById('restaurantName').textContent = this.currentUser.name;
+                        this.loadRestaurantDashboard();
+                    } else if (this.userType === 'ngo') {
+                        document.getElementById('ngoDashboard').classList.add('active-section');
+                        document.getElementById('userName').textContent = this.currentUser.name;
+                        document.getElementById('ngoName').textContent = this.currentUser.name;
+                        this.loadNGODashboard();
+                    } else if (this.userType === 'admin') {
+                        document.getElementById('adminDashboard').classList.add('active-section');
+                        document.getElementById('userName').textContent = this.currentUser.name;
+                        this.loadAdminDashboard();
+                    }
+                    
+                    document.getElementById('authDropdown').style.display = 'block';
+                    document.getElementById('loginDropdown').style.display = 'none';
+                } catch (error) {
+                    this.showToast('Error loading dashboard', 'error');
                 }
+            },
+            
+            loadRestaurantDashboard: function() {
+                const data = FoodBridgeBackend.getRestaurantDashboard(this.currentUser.id);
+                this.renderRestaurantDashboard(data);
+            },
+            
+            renderRestaurantDashboard: function(data) {
+                // Update stats
+                document.getElementById('totalDonations').textContent = data.stats.totalDonations;
+                document.getElementById('kgsSaved').textContent = data.stats.kgsSaved;
+                document.getElementById('pendingRequests').textContent = data.stats.pendingRequests;
+                document.getElementById('avgRating').textContent = data.stats.avgRating;
                 
-                // Update navigation
-                document.getElementById('authDropdown').style.display = 'block';
-                document.getElementById('loginDropdown').style.display = 'none';
+                // Render food listings
+                const foodContainer = document.getElementById('restaurantFoodListings');
+                foodContainer.innerHTML = data.foodListings.map(listing => `
+                    <div class="food-item">
+                        <div class="food-image" style="background-image: url('${listing.image}')"></div>
+                        <div class="food-details">
+                            <span class="food-type">${listing.foodType}</span>
+                            <h4>${listing.description}</h4>
+                            <p>${listing.quantity} kg available. Best before: ${new Date(listing.bestBefore).toLocaleDateString()}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-${listing.status === 'available' ? 'warning' : listing.status === 'claimed' ? 'success' : 'secondary'}">${listing.status}</span>
+                                    <small class="text-muted">Posted ${new Date(listing.createdAt).toLocaleDateString()}</small>
+                                </div>
+                                <div>
+                                    ${listing.status === 'available' ? `
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    ` : `
+                                        <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Render NGOs
+                const ngoContainer = document.getElementById('availableNGOs');
+                ngoContainer.innerHTML = data.ngos.map(ngo => `
+                    <div class="contact-item">
+                        <h5>${ngo.name}</h5>
+                        <p><i class="fas fa-map-marker-alt"></i> ${ngo.address}</p>
+                        <p><i class="fas fa-utensils"></i> Accepts: All food types</p>
+                        <button class="btn btn-sm btn-primary">Contact</button>
+                    </div>
+                `).join('');
+                
+                // Render requests
+                const requestContainer = document.getElementById('restaurantRequests');
+                requestContainer.innerHTML = data.donationRequests.map(request => `
+                    <div class="request-item ${request.status}">
+                        <h5>${request.ngo.name}</h5>
+                        <p>Requested: ${request.foodListing.description}</p>
+                        ${request.status === 'pending' ? `
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-success" onclick="FoodBridgeBackend.updateRequestStatus(${request.id}, 'approved')">Approve</button>
+                                <button class="btn btn-sm btn-danger" onclick="FoodBridgeBackend.updateRequestStatus(${request.id}, 'rejected')">Reject</button>
+                            </div>
+                        ` : `
+                            <p class="text-${request.status === 'approved' ? 'success' : 'danger'}">
+                                <i class="fas fa-${request.status === 'approved' ? 'check' : 'times'}"></i> 
+                                ${request.status.charAt(0).toUpperCase() + request.status.slice(1)}
+                            </p>
+                        `}
+                    </div>
+                `).join('');
+            },
+            
+            loadNGODashboard: function() {
+                const data = FoodBridgeBackend.getNGODashboard(this.currentUser.id);
+                this.renderNGODashboard(data);
+            },
+            
+            renderNGODashboard: function(data) {
+                // Update stats
+                document.getElementById('totalCollections').textContent = data.stats.totalCollections;
+                document.getElementById('kgsReceived').textContent = data.stats.kgsReceived;
+                document.getElementById('pendingNGORequests').textContent = data.stats.pendingRequests;
+                document.getElementById('peopleFed').textContent = data.stats.peopleFed;
+                
+                // Render food listings
+                const foodContainer = document.getElementById('availableFoodListings');
+                foodContainer.innerHTML = data.foodListings.map(listing => `
+                    <div class="food-item">
+                        <div class="food-image" style="background-image: url('${listing.image}')"></div>
+                        <div class="food-details">
+                            <span class="food-type">${listing.foodType}</span>
+                            <h4>${listing.description}</h4>
+                            <p><strong>${listing.restaurant.name}</strong> - ${listing.restaurant.address}</p>
+                            <p>${listing.quantity} kg available. Best before: ${new Date(listing.bestBefore).toLocaleDateString()}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-warning">Available</span>
+                                    <small class="text-muted">Posted ${new Date(listing.createdAt).toLocaleDateString()}</small>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-success" onclick="FoodBridgeBackend.requestDonation(${listing.id})">Request Pickup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Render restaurants
+                const restaurantContainer = document.getElementById('partnerRestaurants');
+                restaurantContainer.innerHTML = data.restaurants.map(restaurant => `
+                    <div class="contact-item">
+                        <h5>${restaurant.name}</h5>
+                        <p><i class="fas fa-map-marker-alt"></i> ${restaurant.address}</p>
+                        <p><i class="fas fa-star"></i> Rating: ${restaurant.rating}/5</p>
+                        <p>${Math.floor(Math.random() * 20) + 5} successful donations</p>
+                    </div>
+                `).join('');
+                
+                // Render requests
+                const requestContainer = document.getElementById('ngoRequests');
+                requestContainer.innerHTML = data.donationRequests.map(request => `
+                    <div class="request-item ${request.status}">
+                        <h5>${request.foodListing.restaurant.name}</h5>
+                        <p>Requested: ${request.foodListing.description}</p>
+                        <p class="text-${request.status === 'pending' ? 'warning' : request.status === 'approved' ? 'success' : 'danger'}">
+                            <i class="fas fa-${request.status === 'pending' ? 'clock' : request.status === 'approved' ? 'check' : 'times'}"></i> 
+                            ${request.status === 'pending' ? 'Waiting for approval' : request.status.charAt(0).toUpperCase() + request.status.slice(1)}
+                        </p>
+                    </div>
+                `).join('');
+            },
+            
+            loadAdminDashboard: function() {
+                const data = FoodBridgeBackend.getAdminDashboard();
+                this.renderAdminDashboard(data);
+            },
+            
+            renderAdminDashboard: function(data) {
+                // Update stats
+                document.getElementById('totalRestaurants').textContent = data.stats.totalRestaurants;
+                document.getElementById('totalNGOs').textContent = data.stats.totalNGOs;
+                document.getElementById('totalMeals').textContent = data.stats.totalMeals;
+                document.getElementById('totalFoodSaved').textContent = data.stats.totalFoodSaved + 'T';
+                
+                // Render recent activities
+                const activitiesContainer = document.getElementById('recentActivities');
+                activitiesContainer.innerHTML = data.recentActivities.map(activity => `
+                    <div class="request-item">
+                        <h5>${activity.type === 'foodListing' ? 'New Food Listing' : 'Donation Activity'}</h5>
+                        <p>${activity.message}</p>
+                        <small class="text-muted">${new Date(activity.timestamp).toLocaleString()}</small>
+                    </div>
+                `).join('');
+                
+                // Render pending approvals
+                const approvalsContainer = document.getElementById('pendingApprovals');
+                approvalsContainer.innerHTML = data.pendingApprovals.map(approval => `
+                    <div class="contact-item unread">
+                        <h5>${approval.name}</h5>
+                        <p>${approval.type}</p>
+                        <small class="text-muted">Waiting for ${approval.waiting}</small>
+                    </div>
+                `).join('');
             },
             
             showToast: function(message, type = 'info') {
@@ -1360,7 +1660,6 @@
                 
                 toastContainer.appendChild(toast);
                 
-                // Remove toast after 5 seconds
                 setTimeout(() => {
                     toast.remove();
                 }, 5000);
