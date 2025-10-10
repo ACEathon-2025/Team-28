@@ -1,8 +1,4 @@
-Here’s a **beautifully formatted and aesthetic README.md** version of your FoodBridge project — clean, modern, and developer-friendly with emojis, clear sections, and markdown highlights for GitHub presentation ✨
 
----
-
-````markdown
 # 🌉 **FoodBridge**
 
 > _Food Donation Made Simple_  
